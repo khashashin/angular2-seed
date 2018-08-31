@@ -1,2 +1,58 @@
-<h3>Home Component</h3>
-<p>Welcome to Angular Seed</p>
+<div class="container">
+    <h3>Employee Form</h3>
+    <form #form="ngForm" [class.was-validated]="firstName.invalid && firstName.touched" novalidate>
+        <div class="form-group">
+            <label class="control-label">First Name</label>
+            <input #firstName="ngModel" required type="text" class="form-control" name="firstName" 
+                [ngModel]="model.firstName" 
+                (ngModelChange)="firstNameToUpperCase($event)">
+                <div class="invalid-feedback">First Name is required!</div>
+        </div>
+
+        <!-- <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lastName" 
+                [(ngModel)]="model.lastName">
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="is-full-time" 
+                [(ngModel)]="model.isFullTime"> Full Time Employee
+            </label>
+        </div>
+
+        <label>Payment Type</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentType" value="w2" checked
+                    [(ngModel)]="model.paymentType">
+                W2
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentType" value="1099"
+                    [(ngModel)]="model.paymentType">
+                1099
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label>Primary Language</label>
+            <select class="form-control"
+                name="primaryLanguage"
+                [(ngModel)]="model.primaryLanguage">
+                <option *ngFor="let lang of languages">
+                    {{lang}}
+                </option>
+            </select>
+        </div> -->
+
+        <button class="btn btn-primary" type="submit">Ok</button>
+    </form>
+    
+    Model: {{ model | json }}
+    <br>
+    Angular: {{ form.value | json }}
+</div>
