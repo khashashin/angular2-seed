@@ -1,58 +1,68 @@
-<div class="container">
+<h3 *ngIf="languages.length == 0">Loading...</h3>
+<div class="container" *ngIf="languages.length > 0">
     <h3>Employee Form</h3>
-    <form #form="ngForm" [class.was-validated]="firstName.invalid && firstName.touched" novalidate>
+    <form #form="ngForm" (submit)="submitForm(form)" novalidate>
         <div class="form-group">
-            <label class="control-label">First Name</label>
-            <input #firstName="ngModel" required type="text" class="form-control" name="firstName" 
+            <label>First Name</label>
+            <input #firstName="ngModel" required type="text" class="form-control" name="firstName"
+                [class.is-invalid]="firstName.invalid && firstName.touched"  
                 [ngModel]="model.firstName" 
                 (ngModelChange)="firstNameToUpperCase($event)">
                 <div class="invalid-feedback">First Name is required!</div>
         </div>
 
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control" name="lastName" 
+            <input #lastName="ngModel" required type="text" class="form-control" name="lastName"
+                [class.is-invalid]="lastName.invalid && lastName.touched"
                 [(ngModel)]="model.lastName">
+            <div class="invalid-feedback">Last Name is required!</div>
         </div>
-
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="is-full-time" 
+                <input type="checkbox" name="is-full-time"
                 [(ngModel)]="model.isFullTime"> Full Time Employee
             </label>
         </div>
-
-        <label>Payment Type</label>
-        <div class="radio">
-            <label>
-                <input type="radio" name="paymentType" value="w2" checked
+        <div class="form-group">
+            <label>Payment Type</label>
+            <div class="form-check">
+                <input class="form-check-input" required type="radio" name="paymentType" value="w2" checked
                     [(ngModel)]="model.paymentType">
-                W2
-            </label>
+                <label class="form-check-label">W2</label>     
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" required type="radio" name="paymentType" value="1099"
+                    [(ngModel)]="model.paymentType">            
+                <label class="form-check-label">1099</label>  
+            </div>
         </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="paymentType" value="1099"
-                    [(ngModel)]="model.paymentType">
-                1099
-            </label>
-        </div>
-        
         <div class="form-group">
             <label>Primary Language</label>
-            <select class="form-control"
-                name="primaryLanguage"
-                [(ngModel)]="model.primaryLanguage">
+            <select #primaryLanguage="ngModel" class="form-control" name="primaryLanguage" [class.is-invalid]="hasPrimaryLanguage"  
+                [(ngModel)]="model.primaryLanguage"
+                (blur)="validatePrimaryLanguage(primaryLanguage.value)"
+                (change)="validatePrimaryLanguage(primaryLanguage.value)">
+                <option value="default">Select a Language...</option>
                 <option *ngFor="let lang of languages">
                     {{lang}}
                 </option>
-            </select>
-        </div> -->
+            </select>            
+            <div class="invalid-feedback">Language is required!</div>
+        </div> 
 
-        <button class="btn btn-primary" type="submit">Ok</button>
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Ok</button>
     </form>
-    
-    Model: {{ model | json }}
     <br>
-    Angular: {{ form.value | json }}
+    <h4>Model:</h4>
+        {{ model | json }}
+    <br>
+    <h4>Angular:</h4>
+        {{ form.value | json }}
+    <br>
+    <h4>Form:</h4>
+        {{form.pristine }} <br>
+        {{form.valid}} <br>
+        {{form.touched}} <br>
+        {{form.untouched}}
 </div>
