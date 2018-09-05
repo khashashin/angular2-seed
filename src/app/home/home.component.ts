@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { FormPoster } from '../services/form-poster.service';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,13 @@ export class HomeComponent {
   languages = [];
   model = new Employee('', '', true, '', 'default');
   hasPrimaryLanguage = false;
+  startDate: Date;
+  startTime: Date = new Date();
+  hstep = 1;
+  mstep = 15;
+  sstep = 10;
+  singleModel = 'Off';
+  radioModel = 'Middle';
 
   constructor(private formPoster: FormPoster) {
     this.formPoster.getLanguages()

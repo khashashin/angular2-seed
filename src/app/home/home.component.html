@@ -1,4 +1,136 @@
-<h3 *ngIf="languages.length == 0">Loading...</h3>
+<div class="container">
+    <h3>Angular 2 Forms</h3>
+    <form>
+        <div class="form-group">
+            <input type="text"
+                    placeholder="Datepicker"
+                    class="form-control"
+                    bsDatepicker
+                    [bsConfig]="{ showWeekNumbers: false }"
+                    name="startDate"
+                    [(ngModel)]="startDate">
+        </div>
+        <h4>Start Date:</h4>
+        {{startDate}} <br>
+        <hr>
+        <div class="form-group">
+            <timepicker name="startTime"
+                [(ngModel)]="startTime"
+                [showSeconds]="true"
+                [hourStep]="hstep" 
+                [minuteStep]="mstep" 
+                [secondsStep]="sstep">
+            </timepicker>
+        </div>
+        <pre class="alert alert-info">Time is: {{startTime}}</pre> <br>
+        <hr>
+        <div class="form-group">
+            <pre class="card card-body">{{singleModel}}</pre> <br>
+            <button type="button" 
+                    class="btn"
+                    [class.btn-primary]="singleModel === 'On'"
+                    name="singleModel"
+                    [(ngModel)]="singleModel"
+                    btnCheckbox
+                    btnCheckboxTrue="On" 
+                    btnCheckboxFalse="Off">
+                {{singleModel}}
+            </button>
+        </div>
+        <hr>
+        <div class="form-group">
+            <pre class="card card-block card-header">{{radioModel || 'null'}}</pre><br>
+            <div class="btn-group">
+                <label class="btn btn-primary" 
+                        [(ngModel)]="radioModel"
+                        btnRadio="Left" 
+                        name="Left"
+                        tabindex="0" 
+                        role="button">
+                        Left
+                </label>
+                <label class="btn btn-primary" 
+                        [(ngModel)]="radioModel"
+                        btnRadio="Middle" 
+                        name="Middle"
+                        tabindex="0" 
+                        role="button">
+                        Middle
+                </label>
+                <label class="btn btn-primary" 
+                        [(ngModel)]="radioModel"
+                        btnRadio="Right" 
+                        name="Right"
+                        tabindex="0" 
+                        role="button">
+                        Right
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div>
+                <rating name="postRating" [max]="10" [(ngModel)]="postRating" [customTemplate]="tt"></rating>
+                <br> <b>(<i>Rate:</i>{{postRating}})</b>
+                <ng-template #tt let-i="index" let-v="value">
+                    <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+                    {{i < v ? '&#9733;' : '&#9734;'}}
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </form>
+    <hr>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h3 *ngIf="languages.length == 0">Loading...</h3>
 <div class="container" *ngIf="languages.length > 0">
     <h3>Employee Form</h3>
     <form #form="ngForm" (submit)="submitForm(form)" novalidate>
@@ -65,4 +197,4 @@
         {{form.valid}} <br>
         {{form.touched}} <br>
         {{form.untouched}}
-</div>
+</div> -->
